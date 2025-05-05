@@ -39,6 +39,13 @@ def delete(id):
     db.session.commit()
     return redirect(url_for('home'))
 
+@app.route('/completed/<int:id>',methods=['POST'])
+def completed(id):
+    task= Task.query.get(id)
+    task.completed = not task.completed
+    db.session.commit()
+    return redirect(url_for('home'))
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
